@@ -1,0 +1,53 @@
+.login-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100vw;
+  height: 80vh;
+  gap: 2rem;
+  padding: 0;
+  margin: 0;
+}
+.login-form-title{
+  color: black;
+}
+.form-container{
+  border: 1px solid black;
+  width: 40%;
+  padding: 1rem;
+  border-radius: 20px;
+  height: 400px;
+  background: rgba(248, 248, 248, 0.805);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(8.4px);
+-webkit-backdrop-filter: blur(6.4px);
+}
+.list-validate{
+  display:inline-block;
+  padding: .5rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 3px 3px 10px rgb(190, 190, 190);
+  width: auto;
+}
+.list-validate li{
+  list-style: none;
+  font-family:  "Kulim Park", sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+.hide{
+  display: none;
+}
+@media (max-width: 570px){
+  .form-container{
+    width: 96%;
+  }
+  .list-validate li{
+    font-size: 10px;
+    line-height: 15px;
+    font-weight: 400;
+  }
+}

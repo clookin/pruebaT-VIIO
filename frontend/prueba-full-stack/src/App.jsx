@@ -3,15 +3,19 @@ import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Products from "./Pages/Products";
-import Navbar from "./Components/Navbar/Navbar";
+import ProtectedRoutes from "./Components/ProtectedRoutes.jsx";
+import Background from "./Components/Background/Background.jsx";
+
 function App() {
   return (
     <BrowserRouter>
-    <Navbar/>
+      <Background />
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/products" element={<Products />} />
+        <Route element={<ProtectedRoutes/>}>
+          <Route path="/products" element={<Products />} />
+          <Route path="/home" element={<Home />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

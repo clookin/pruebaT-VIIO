@@ -3,19 +3,12 @@ import * as Yup from "yup";
 import "./LoginForm.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { useSnackbar } from 'notistack';
 import {
   Button,
-  // FormControl,
-  // FormHelperText,
   Grid,
-  // IconButton,
-  // InputAdornment,
-  // InputLabel,
-  // OutlinedInput,
   Typography,
 } from "@mui/material";
-// import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
 import EmailField from "../EmailField/EmailField";
 import PasswordField from "../PasswordField/PasswordField";
@@ -26,6 +19,7 @@ const validatePassword = (password) => ({
   upperCase: /[A-Z]/.test(password),
 });
 const LoginForm = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -58,8 +52,9 @@ const LoginForm = () => {
         );
         localStorage.setItem("token", res.data.data.token);
         navigate("/home");
+        enqueueSnackbar("Inicio de sesión exitoso", { variant: "success", autoHideDuration: 2000});
       } catch (err) {
-        console.log(err);
+        enqueueSnackbar("Credenciales incorrectas", { variant: "error", autoHideDuration: 2000 });
       }
     },
   });
@@ -74,27 +69,36 @@ const LoginForm = () => {
     event.preventDefault();
   };
   const allValidationsPassed = Object.values(passwordIsValid).every(Boolean);
+  function allFieldsFilled(values) {
+    return Object.values(values).every((value) => Boolean(value));
+  }
   return (
     <>
       <section className="login-form">
         <Typography
           className="login-form-title"
-          variant="h2"
+          variant="h3"
           sx={{ fontWeight: "bold", fontFamily: "Kulim Park, sans-serif" }}
           align="center"
         >
           MAYNOOTH
         </Typography>
-        <form className="form-container" onSubmit={handleSubmit}>
+        <form className="form-container-login" onSubmit={handleSubmit}>
+          <div className="form-info">
+          <p>INICIAR SESIÓN</p>
+          </div>
           <Grid
             container
             direction="row"
             alignItems="center"
             justifyContent="center"
             spacing={2}
+            marginBottom={3}
+            marginTop={5}
           >
             <Grid item xs={12} md={11} lg={11}>
               <EmailField
+                
                 value={values.email}
                 handleChange={handleChange}
                 errors={errors.email}
@@ -113,16 +117,37 @@ const LoginForm = () => {
                 passwordIsValid={passwordIsValid}
                 allValidationsPassed={allValidationsPassed}
                 isPasswordFocused={isPasswordFocused}
+                showValidations={false}
               />
             </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            variant="contained"
-            sx={{ bgcolor: "grey.900", "&:hover": { bgcolor: "grey.800" } }}
-          >
-            Ingresar
-          </Button>
+            <Grid item xs={12} md={11} lg={11} marginTop={2} align="center">
+            <Button
+                type="submit"
+                variant="contained"
+                sx={{ bgcolor: "grey.900", "&:hover": { bgcolor: "grey.800" } }}
+                disabled={!allFieldsFilled(values)}
+              >
+                Iniciar
+              </Button>
+            </Grid>
+            <Grid item xs={12} md={11} lg={11} textAlign="center">
+              <p>o</p>
+            </Grid>
+          <Grid item xs={12} md={11} lg={11} align="center">
+              <Button
+              disabled
+              sx={{ width: "70%", color:'black',border:'1px solid black' }} size="small" variant="outlined" fontSize="small">
+                Continuar con Google
+              </Button>
+            </Grid>
+            <Grid item xs={12} md={11} lg={11} align="center">
+              <Button
+              disabled
+              sx={{ width: "70%", color:'black',border:'1px solid black'}} size="small" variant="outlined" fontSize="small">
+                Continuar con Facebook
+              </Button>
+            </Grid>
+            </Grid>
         </form>
       </section>
     </>

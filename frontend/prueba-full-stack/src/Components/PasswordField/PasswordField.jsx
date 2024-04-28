@@ -3,10 +3,10 @@ import { FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, For
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import PropTypes from 'prop-types';
 
-export default function PasswordField({ value, handleChange, handleFocus, handleBlur, handleClickShowPassword, handleMouseDownPassword, errors, showPassword, passwordIsValid, allValidationsPassed,isPasswordFocused}) {
+export default function PasswordField({ value, handleChange, handleFocus, handleBlur, handleClickShowPassword, handleMouseDownPassword, errors, showPassword, passwordIsValid, allValidationsPassed,isPasswordFocused,showValidations}) {
   return (
-    <FormControl fullWidth variant="outlined" error={Boolean(errors)}>
-      <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+    <FormControl size='small' fullWidth variant="outlined" error={Boolean(errors)}>
+      <InputLabel htmlFor="outlined-adornment-password">Contraseña</InputLabel>
       <OutlinedInput
         id="outlined-adornment-password"
         type={showPassword ? "text" : "password"}
@@ -30,7 +30,7 @@ export default function PasswordField({ value, handleChange, handleFocus, handle
         label="Password"
       />
       <FormHelperText>{errors}</FormHelperText>
-      {isPasswordFocused && passwordIsValid && (
+      {isPasswordFocused && passwordIsValid && showValidations &&(
         <ul className={`list-validate ${allValidationsPassed ? 'hide' : ''}`}>
           <li style={passwordIsValid.length ? { display: "none" } : { color: "3f51b5" }}>La contraseña debe tener al menos 8 caracteres</li>
           <li style={passwordIsValid.digit ? { display: "none" } : { color: "3f51b5" }}>La contraseña debe tener al menos 1 dígito</li>
@@ -59,5 +59,6 @@ PasswordField.propTypes = {
   }).isRequired,
   allValidationsPassed: PropTypes.bool.isRequired,
   isPasswordFocused: PropTypes.bool.isRequired,
+  showValidations: PropTypes.bool,
 };
 

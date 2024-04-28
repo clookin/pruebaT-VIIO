@@ -2,9 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  width: 100vw;
-  height: 80vh;
+  justify-content: center;
+  width: 95vw;
+  height: 100vh;
   gap: 2rem;
   padding: 0;
   margin: 0;
@@ -12,23 +12,33 @@
 .login-form-title{
   color: black;
 }
-.form-container{
-  border: 1px solid black;
-  width: 40%;
+.form-container-login{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(62, 61, 61, 0.361);
+  width: 30%;
   padding: 1rem;
-  border-radius: 20px;
-  height: 400px;
+  border-radius: 10px;
+  height: 500px;
   background: rgba(248, 248, 248, 0.805);
-border-radius: 16px;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(8.4px);
 -webkit-backdrop-filter: blur(6.4px);
 }
+.form-info{
+  font-size: 18px;
+  font-family:  "Kulim Park", sans-serif;
+  font-weight: 500;
+}
 .list-validate{
+  position: absolute;
+  top: 55px;
   display:inline-block;
   padding: .5rem;
-  border: 1px solid black;
+  border: 1px solid rgba(0, 0, 0, 0.404);
   border-radius: 5px;
+  background-color: white;
   box-shadow: 3px 3px 10px rgb(190, 190, 190);
   width: auto;
 }
@@ -41,13 +51,24 @@ backdrop-filter: blur(8.4px);
 .hide{
   display: none;
 }
+div .css-1luzh6p-MuiGrid-root>.MuiGrid-item {
+  padding-top: 8px;
+}
 @media (max-width: 570px){
-  .form-container{
+  .form-container, .form-container-login{
     width: 96%;
+    height: 500px;
   }
   .list-validate li{
     font-size: 10px;
     line-height: 15px;
     font-weight: 400;
   }
+  div .css-1luzh6p-MuiGrid-root>.MuiGrid-item {
+    padding-top: 7px;
+  }
+  .form-container, .register-form{
+    background: rgba(248, 248, 248, 0.381);
+  }
+
 }

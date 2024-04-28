@@ -1,16 +1,4 @@
-// import { Visibility, VisibilityOff } from "@mui/icons-material";
-import {
-  Button,
-  // FilledInput,
-  // FormControl,
-  // FormHelperText,
-  Grid,
-  // IconButton,
-  // InputAdornment,
-  // InputLabel,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, Grid, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import "./Formulario.css";
 import { useFormik } from "formik";
@@ -19,33 +7,35 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import EmailField from "../EmailField/EmailField";
 import PasswordField from "../PasswordField/PasswordField";
+import { useSnackbar } from "notistack";
 
-const validatePassword = (password)=>({
-      length: password.length >= 8,
-      digit: /\d/.test(password),
-      lowerCase: /[a-z]/.test(password),
-      upperCase: /[A-Z]/.test(password),
-    });
-    
-    const Formulario = () => {
-      const navigate = useNavigate();
-      const [showPassword, setShowPassword] = useState(false);
-      const [isPasswordFocused, setIsPasswordFocused] = useState(false);
-      const [passwordIsValid, setPasswordIsValid] = useState({
-        length: false,
-        digit: false,
-        lowerCase: false,
-        upperCase: false,
-      });
-      
+const validatePassword = (password) => ({
+  length: password.length >= 8,
+  digit: /\d/.test(password),
+  lowerCase: /[a-z]/.test(password),
+  upperCase: /[A-Z]/.test(password),
+});
+
+const Formulario = () => {
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+  const [passwordIsValid, setPasswordIsValid] = useState({
+    length: false,
+    digit: false,
+    lowerCase: false,
+    upperCase: false,
+  });
+
   const handlePasswordFocus = () => setIsPasswordFocused(true);
   const handlePasswordBlur = () => setIsPasswordFocused(false);
-      
-      const { handleSubmit, handleChange, errors, values } = useFormik({
-        initialValues: {
-          fullName: "",
-          email: "",
-          password: "",
+
+  const { handleSubmit, handleChange, errors, values } = useFormik({
+    initialValues: {
+      fullName: "",
+      email: "",
+      password: "",
     },
     validationSchema: Yup.object({
       fullName: Yup.string().required("Por favor, ingresa un Nombre"),
@@ -64,17 +54,12 @@ const validatePassword = (password)=>({
     }),
     onSubmit: async (data) => {
       try {
-        axios.post('http://localhost:3000/api/register',data)
-        .then(res =>console.log(res))
-      //   .catch(err=>(console.log(err, data)))
-      // }
-        // const { email, password } = data;
-        // const user = { email, password };
-        // const res = await
-        // axios.post("http://localhost:3000/api/auth/login", user);
-        //     localStorage.setItem("token", res.data.data.token);
+        axios
+          .post("http://localhost:3000/api/register", data)
+          .then((res) => console.log(res));
         navigate("/home");
-      } catch (err){
+        enqueueSnackbar("Registro exitoso", { variant: "success", autoHideDuration: 2000});
+      } catch (err) {
         console.log(err);
       }
     },
@@ -90,122 +75,103 @@ const validatePassword = (password)=>({
     event.preventDefault();
   };
   const allValidationsPassed = Object.values(passwordIsValid).every(Boolean);
-
+  function allFieldsFilled(values) {
+    return Object.values(values).every((value) => Boolean(value));
+  }
   return (
     <>
-      <Typography color="primary" variant="h2" align="center">
-        Registro
-      </Typography>
-      <form className="form-container" onSubmit={handleSubmit}>
-        <Grid
-          container
-          direction="row"
-          alignItems="center"
-          justifyContent="center"
-          spacing={2}
+      <section className="register-form">
+        <Typography
+          className="login-form-title"
+          variant="h3"
+          sx={{ fontWeight: "bold", fontFamily: "Kulim Park, sans-serif"}}
+          align="center"
         >
-          <Grid item xs={12} md={8} lg={5}>
-            <TextField
-              name="fullName"
-              label="Ingrese su nombre"
-              variant="filled"
-              fullWidth
-              sx={{ width: "100%" }}
-              onChange={handleChange}
-              autoComplete="fullName"
-              value={values.fullName}
-              error={Boolean(errors.fullName)}
-              helperText={errors.fullName}
-            />
-          </Grid>
-          <Grid item xs={12} md={8} lg={5}>
-              <EmailField value={values.email} handleChange={handleChange} errors={errors.email} />
-          </Grid>
-          <Grid item xs={12} md={8} lg={5}>
-          <PasswordField 
-  value={values.password} 
-  handleChange={passwordChange} 
-  handleFocus={handlePasswordFocus} 
-  handleBlur={handlePasswordBlur} 
-  handleClickShowPassword={handleClickShowPassword} 
-  handleMouseDownPassword={handleMouseDownPassword} 
-  errors={errors.password} 
-  showPassword={showPassword} 
-  passwordIsValid={passwordIsValid} 
-  allValidationsPassed={allValidationsPassed} 
-  isPasswordFocused={isPasswordFocused}
-/>
-            {/* <FormControl
-              fullWidth
-              variant="filled"
-              error={Boolean(errors.password)}
-            >
-              <InputLabel htmlFor="filled-adornment-password">
-                Password
-              </InputLabel>
-              <FilledInput
-                id="filled-adornment-password"
-                type={showPassword ? "text" : "password"}
-                onChange={passwordChange}
-                name="password"
-                value={values.password}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
+          MAYNOOTH
+        </Typography>
+        <form className="form-container" onSubmit={handleSubmit}>
+        <div className="form-info">
+          <p> REGÍSTRATE</p>
+          </div>
+          <Grid
+            container
+            direction="row"
+            alignItems="center"
+            justifyContent="center"
+            spacing={2}
+            marginBottom={3}
+            marginTop={1}
+          >
+            <Grid item xs={12} md={11} lg={11}>
+              <TextField
+              size="small"
+                className="textfield"
+                name="fullName"
+                label="Nombre"
+                variant="outlined"
+                fullWidth
+                sx={{ width: "100%" }}
+                onChange={handleChange}
+                autoComplete="fullName"
+                value={values.fullName}
+                error={Boolean(errors.fullName)}
+                helperText={errors.fullName}
+                placeholder="Steve Jobs"
               />
-              <FormHelperText>{errors.password}</FormHelperText>
-            </FormControl>
-            <ul>
-              <li
-                style={
-                  passwordIsValid.length
-                    ? { display: "none" }
-                    : { color: "red" }
-                }
+            </Grid>
+            <Grid item xs={12} md={11} lg={11}>
+              <EmailField
+                value={values.email}
+                handleChange={handleChange}
+                errors={errors.email}
+              />
+            </Grid>
+            <Grid item xs={12} md={11} lg={11}>
+              <PasswordField
+                value={values.password}
+                handleChange={passwordChange}
+                handleFocus={handlePasswordFocus}
+                handleBlur={handlePasswordBlur}
+                handleClickShowPassword={handleClickShowPassword}
+                handleMouseDownPassword={handleMouseDownPassword}
+                errors={errors.password}
+                showPassword={showPassword}
+                passwordIsValid={passwordIsValid}
+                allValidationsPassed={allValidationsPassed}
+                isPasswordFocused={isPasswordFocused}
+                showValidations={true}
+              />
+            </Grid>
+            <Grid item xs={12} md={11} lg={11} marginTop={2} align="center">
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{ bgcolor: "grey.900", "&:hover": { bgcolor: "grey.800" } }}
+                disabled={!allFieldsFilled(values)}
               >
-                La contraseña debe tener al menos 8 caracteres
-              </li>
-              <li
-                style={
-                  passwordIsValid.digit ? { display: "none" } : { color: "red" }
-                }
-              >
-                La contraseña debe tener al menos 1 dígito
-              </li>
-              <li
-                style={
-                  passwordIsValid.lowerCase
-                    ? { display: "none" }
-                    : { color: "red" }
-                }
-              >
-                La contraseña debe tener al menos 1 letra minúscula
-              </li>
-              <li
-                style={
-                  passwordIsValid.upperCase
-                    ? { display: "none" }
-                    : { color: "red" }
-                }
-              >
-                La contraseña debe tener al menos 1 letra mayúscula
-              </li>
-            </ul> */}
+                Registrar
+              </Button>
+            </Grid>
+            <Grid item xs={12} md={11} lg={11} textAlign="center">
+              <p>o</p>
+            </Grid>
+            <Grid item xs={12} md={11} lg={11} align="center">
+              <Button
+              disabled
+              sx={{ width: "70%", color:'black',border:'1px solid black' }} size="small" variant="outlined" fontSize="small">
+                Registrar con Google
+              </Button>
+            </Grid>
+            <Grid item xs={12} md={11} lg={11} align="center">
+              <Button
+              disabled
+              sx={{ width: "70%", color:'black',border:'1px solid black'}} size="small" variant="outlined" fontSize="small">
+                Registrar con Facebook
+              </Button>
+            </Grid>
           </Grid>
-        </Grid>
-        <Button type="submit" variant="contained" sx={{ bgcolor: 'grey.900', '&:hover': { bgcolor: 'grey.800' }}}>
-          Registrar
-        </Button>
-      </form>
+        </form>
+      </section>
     </>
   );
 };

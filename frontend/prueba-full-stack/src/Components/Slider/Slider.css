@@ -1,0 +1,11 @@
+.rounded-lg {
+  border-radius: none;
+}
+.slider-container-mobile {
+  margin-top: 4rem;
+}
+@media (max-width: 470px) {
+  .slider-container-mobile {
+    margin-top: 4rem;
+  }
+}

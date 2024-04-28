@@ -12,6 +12,9 @@ import {
 import { useState } from "react";
 import EmailField from "../EmailField/EmailField";
 import PasswordField from "../PasswordField/PasswordField";
+
+
+
 const validatePassword = (password) => ({
   length: password.length >= 8,
   digit: /\d/.test(password),
@@ -19,6 +22,7 @@ const validatePassword = (password) => ({
   upperCase: /[A-Z]/.test(password),
 });
 const LoginForm = () => {
+    // Hooks y funciones para manejar el estado y la lógica del formulario
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
@@ -30,9 +34,11 @@ const LoginForm = () => {
     upperCase: false,
   });
 
+    // Funciones para manejar el enfoque del campo de contraseña
   const handlePasswordFocus = () => setIsPasswordFocused(true);
   const handlePasswordBlur = () => setIsPasswordFocused(false);
 
+  // Configuración de Formik para el formulario
   const { handleSubmit, handleChange, errors, values } = useFormik({
     initialValues: {
       email: "",
@@ -44,6 +50,8 @@ const LoginForm = () => {
         .required("Por favor, ingresa un Email"),
       password: Yup.string().required("Por favor, ingresa una contraseña"),
     }),
+
+    // Función para manejar el envío del formulario
     onSubmit: async (data) => {
       try {
         const res = await axios.post(
@@ -58,17 +66,24 @@ const LoginForm = () => {
       }
     },
   });
+
+  // Función para manejar el cambio en el campo de contraseña
   const passwordChange = (event) => {
     // Actualiza el estado de Formik
     handleChange(event);
     setPasswordIsValid(validatePassword(event.target.value));
   };
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
 
+  // Funciones para manejar el mostrar/ocultar la contraseña
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
+  // Verificación de las validaciones de la contraseña
   const allValidationsPassed = Object.values(passwordIsValid).every(Boolean);
+
+  // Verificación de que todos los campos estén llenos
   function allFieldsFilled(values) {
     return Object.values(values).every((value) => Boolean(value));
   }

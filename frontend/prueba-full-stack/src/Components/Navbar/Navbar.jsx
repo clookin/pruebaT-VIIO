@@ -13,15 +13,16 @@ const Navbar = () => {
   };
   return (
     <div className="nav-bar">
+      <strong className="title-shop">MAYNOOTH</strong>
     {isLoggedIn && (
         <ul className="nav-menu nav-menu-l">
-          <Link className="nav-menu-icon">
+          <Link className="nav-menu-icon" to="/home">
           <FontAwesomeIcon icon={faHouse} />
           </Link> 
-          <Link className="nav-menu-icon">
+          <Link className="nav-menu-icon"to="/checkout">
           <FontAwesomeIcon icon={faBagShopping} />
           </Link>
-          <Link className="nav-menu-icon">
+          <Link className="nav-menu-icon" to="/" onClick={handleLogout}>
           <FontAwesomeIcon icon={faRightFromBracket} />
           </Link>
           <li className="nav-menu-li">
@@ -30,8 +31,8 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="nav-menu-li">
-            <Link className="link" to="/products">
-              Productos
+            <Link className="link" to="/checkout">
+              CheckOut
             </Link>
           </li>
             <li className="nav-menu-li">

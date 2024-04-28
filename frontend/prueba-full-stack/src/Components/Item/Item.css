@@ -31,7 +31,7 @@
     object-fit:contain;
     align-self: center;
     margin-bottom: 20px;
-    filter: drop-shadow(5px 10px 10px #b9b0b0);
+    filter: drop-shadow(3px 3px 3px #b9b0b0);
     /* overflow: hidden; */
     transition: 0.3s ease-in;
   }

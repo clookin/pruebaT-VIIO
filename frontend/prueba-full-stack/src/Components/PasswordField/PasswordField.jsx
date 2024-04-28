@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 
 export default function PasswordField({ value, handleChange, handleFocus, handleBlur, handleClickShowPassword, handleMouseDownPassword, errors, showPassword, passwordIsValid, allValidationsPassed,isPasswordFocused,showValidations}) {
   return (
-    <FormControl size='small' fullWidth variant="outlined" error={Boolean(errors)}>
-      <InputLabel htmlFor="outlined-adornment-password">Contraseña</InputLabel>
+    <FormControl size='small' fullWidth variant="outlined" error={Boolean(errors)} >
+      <InputLabel htmlFor="outlined-adornment-password" >Contraseña</InputLabel>
       <OutlinedInput
         id="outlined-adornment-password"
         type={showPassword ? "text" : "password"}

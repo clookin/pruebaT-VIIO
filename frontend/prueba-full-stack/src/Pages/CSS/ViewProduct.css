@@ -1,0 +1,29 @@
+.container-product-view{
+  width: 100vw;
+  height: 100vh;
+  padding: 2rem;
+}
+.container-product-content{
+  margin: auto;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container-product-info{
+  padding: 2rem;
+  border: 1px solid rgb(104, 104, 104);
+  background-color: rgba(255, 255, 255, 0.788);
+  border-radius: 5px;
+}
+.image-products{
+  width: 70%;
+  margin: auto;
+}
+.productos_seccion-productos{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}

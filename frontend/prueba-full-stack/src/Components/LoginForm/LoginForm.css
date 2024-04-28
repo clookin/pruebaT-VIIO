@@ -70,5 +70,8 @@ div .css-1luzh6p-MuiGrid-root>.MuiGrid-item {
   .form-container, .register-form{
     background: rgba(248, 248, 248, 0.381);
   }
+}
 
+input {
+  --tw-ring-shadow: 0 0 #000 !important;
 }

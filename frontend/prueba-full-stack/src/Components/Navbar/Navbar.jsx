@@ -15,9 +15,15 @@ const Navbar = () => {
     <div className="nav-bar">
     {isLoggedIn && (
         <ul className="nav-menu nav-menu-l">
+          <Link className="nav-menu-icon">
           <FontAwesomeIcon icon={faHouse} />
+          </Link> 
+          <Link className="nav-menu-icon">
           <FontAwesomeIcon icon={faBagShopping} />
+          </Link>
+          <Link className="nav-menu-icon">
           <FontAwesomeIcon icon={faRightFromBracket} />
+          </Link>
           <li className="nav-menu-li">
             <Link className="link" to="/home">
               Inicio

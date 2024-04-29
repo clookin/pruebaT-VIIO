@@ -10,7 +10,7 @@ const CheckOut = () => {
   const token = localStorage.getItem("token");
   // Hook de navegación
   const navigate = useNavigate();
-  
+
   // Llamada a la API para obtener los productos al cargar el componente
   useEffect(()=>{
     axios.get('http://localhost:3000/api/products',{
@@ -19,7 +19,6 @@ const CheckOut = () => {
       }
     })
     .then(res => {
-      console.log(res);
       setCart(res.data.carts); 
     })
     .catch(err=>console.log(err))

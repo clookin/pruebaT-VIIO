@@ -13,7 +13,6 @@ const CheckOutView = () => {
     axios
       .get(`https://dummyjson.com/cart/${id}`)
       .then((res) => {
-        console.log(res.data);
         // Actualiza el estado con los productos del carrito
         setCart(res.data);
       })

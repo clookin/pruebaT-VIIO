@@ -1,0 +1,15 @@
+# Ignorar la carpeta node_modules
+node_modules
+
+# Ignorar los archivos de registro
+npm-debug.log
+
+
+# Ignorar la carpeta de construcción
+dist
+
+# Ignorar los archivos de configuración del editor
+.vscode
+.idea
+*.swp
+*.swo

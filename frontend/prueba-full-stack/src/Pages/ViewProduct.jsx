@@ -4,8 +4,11 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./CSS/ViewProduct.css";
-
+import Navbar from "../Components/Navbar/Navbar";
+import { useNavigate } from "react-router-dom";
+import { Button } from "flowbite-react";
 const ViewProduct = () => {
+  const navigate = useNavigate();
   const [product, setProduct] = useState({});
   const { id } = useParams();
   useEffect(() => {
@@ -17,6 +20,8 @@ const ViewProduct = () => {
 
   return (
     <>
+    <Navbar/>
+    <Button className="btn-back bg-black" onClick={() => navigate(-1)}>Retroceder</Button>
       <article className="container-product-view">
         <div className="p-3 max-w-7xl container-product-content">
           <section className=" container-product-info">
@@ -70,6 +75,7 @@ const ViewProduct = () => {
                       <button
                         className="flex justify-center items-center gap-2 w-full py-3 px-4 bg-red-500 text-white text-md font-bold border border-red-500 rounded-md ease-in-out duration-150 shadow-slate-600 hover:bg-white hover:text-red-500 lg:m-0 md:px-6"
                         title="Confirm Order"
+                        disabled={true}
                       >
                         <span>Agregar al carrito</span>
                         <HiOutlineArrowCircleRight />

@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 const CheckOutItem = ({item}) => {
-  console.log(item);
   return (
     <>
     <div className="flex flex-col md:flex-col justify-start items-start w-full pb-8 space-y-4 md:space-y-0">

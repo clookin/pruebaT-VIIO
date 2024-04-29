@@ -19,7 +19,6 @@ const ProductsCall = () => {
 
     axios.get("https://dummyjson.com/products/categories")
     .then(res => {
-      console.log(res.data);
       setCategories(res.data)
     })
     .catch(err=> console.log(err))
@@ -32,7 +31,7 @@ const ProductsCall = () => {
   const handleSearch = (e) =>{
     setSearch(e.target.value)
   }
-  
+
   return (
     <>
       <main className="main-productos">
